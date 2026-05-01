@@ -5,34 +5,29 @@ import { cn } from "@/lib/utils"
 import { useSectionReveal } from "@/hooks/use-section-reveal"
 import { useTypewriter } from "@/hooks/use-typewriter"
 import { useLanguage } from "@/lib/i18n"
+import { ChevronDown } from "lucide-react"
 
-function FAQItem({ q, a, open, toggle }: { q: string; a: string; open: boolean; toggle: () => void }) {
+function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
   return (
-    <div className="border-b border-white/15">
+    <div className="border-b border-white/15 last:border-b-0">
       <button
-        onClick={toggle}
-        className="flex w-full items-center justify-between py-5 text-left transition-colors"
+        type="button"
+        onClick={onToggle}
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
-        <span className="text-base font-semibold text-white pr-4">{q}</span>
-        <svg
-          width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-          className={cn("shrink-0 text-[#f0b400] transition-transform duration-300", open && "rotate-45")}
-        >
-          <line x1="12" y1="5" x2="12" y2="19" />
-          <line x1="5" y1="12" x2="19" y2="12" />
-        </svg>
+        <span className="text-base font-semibold text-white">{q}</span>
+        <ChevronDown 
+          className={cn(
+            "h-5 w-5 shrink-0 text-[#f0b400] transition-transform duration-200",
+            isOpen && "rotate-180"
+          )} 
+        />
       </button>
-      <div
-        className={cn(
-          "grid transition-all duration-300 ease-in-out",
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        )}
-      >
-        <div className="overflow-hidden">
-          <p className="pb-5 text-sm font-medium leading-relaxed text-white/70">{a}</p>
+      {isOpen && (
+        <div className="pb-5">
+          <p className="text-sm font-medium leading-relaxed text-white/70">{a}</p>
         </div>
-      </div>
+      )}
     </div>
   )
 }
@@ -53,6 +48,10 @@ export function FAQ() {
     { q: t("faq.q7"), a: t("faq.a7") },
     { q: t("faq.q8"), a: t("faq.a8") },
   ]
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
   return (
     <section id="faq" className="relative py-28" ref={ref}>
@@ -77,8 +76,8 @@ export function FAQ() {
               <FAQItem
                 q={faq.q}
                 a={faq.a}
-                open={openIndex === i}
-                toggle={() => setOpenIndex(openIndex === i ? null : i)}
+                isOpen={openIndex === i}
+                onToggle={() => handleToggle(i)}
               />
             </div>
           ))}
