@@ -12,12 +12,28 @@ export function Footer({ onNavigate }: { onNavigate?: (section: string) => void 
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
     e.preventDefault()
-    const el = document.getElementById(section)
+    // Try multiple ways to find the section
+    let el = document.getElementById(section)
+    if (!el) {
+      el = document.querySelector(`[id="${section}"]`) as HTMLElement
+    }
+    if (!el) {
+      el = document.querySelector(`section#${section}`) as HTMLElement
+    }
+    
     if (el) {
       const headerOffset = 80
       const elementPosition = el.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
       window.scrollTo({ top: offsetPosition, behavior: "smooth" })
+    } else {
+      // Fallback: use onNavigate if provided
+      if (onNavigate) {
+        onNavigate(section)
+      } else {
+        // Last resort: try native anchor behavior
+        window.location.hash = section
+      }
     }
   }
   return (

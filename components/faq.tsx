@@ -12,6 +12,7 @@ function FAQItem({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
       <button
         onClick={toggle}
         className="flex w-full items-center justify-between py-5 text-left transition-colors"
+        aria-expanded={open}
       >
         <span className="text-base font-semibold text-white pr-4">{q}</span>
         <svg
@@ -24,14 +25,13 @@ function FAQItem({ q, a, open, toggle }: { q: string; a: string; open: boolean; 
         </svg>
       </button>
       <div
-        className={cn(
-          "grid transition-all duration-300 ease-in-out",
-          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        )}
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{
+          maxHeight: open ? "500px" : "0px",
+          opacity: open ? 1 : 0,
+        }}
       >
-        <div className="overflow-hidden">
-          <p className="pb-5 text-sm font-medium leading-relaxed text-white/70">{a}</p>
-        </div>
+        <p className="pb-5 text-sm font-medium leading-relaxed text-white/70">{a}</p>
       </div>
     </div>
   )
