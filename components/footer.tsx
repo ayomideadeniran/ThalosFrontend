@@ -10,40 +10,18 @@ export function Footer({ onNavigate }: { onNavigate?: (section: string) => void 
   const { t } = useLanguage()
   const { ref, isVisible } = useSectionReveal(0.05)
   
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
-    e.preventDefault()
-    console.log("[v0] Footer nav clicked:", section)
-    
-    // Try multiple ways to find the section
-    let el = document.getElementById(section)
-    console.log("[v0] getElementById result:", el)
-    
-    if (!el) {
-      el = document.querySelector(`[id="${section}"]`) as HTMLElement
-      console.log("[v0] querySelector [id=] result:", el)
-    }
-    if (!el) {
-      el = document.querySelector(`section#${section}`) as HTMLElement
-      console.log("[v0] querySelector section# result:", el)
-    }
-    
+  const scrollToSection = (sectionId: string) => {
+    const el = document.getElementById(sectionId)
     if (el) {
-      console.log("[v0] Found element, scrolling to:", section)
       const headerOffset = 80
       const elementPosition = el.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
       window.scrollTo({ top: offsetPosition, behavior: "smooth" })
-    } else {
-      console.log("[v0] Element not found, trying fallback")
-      // Fallback: use onNavigate if provided
-      if (onNavigate) {
-        onNavigate(section)
-      } else {
-        // Last resort: try native anchor behavior
-        window.location.hash = section
-      }
+    } else if (onNavigate) {
+      onNavigate(sectionId)
     }
   }
+
   return (
     <footer ref={ref}>
       <div className={cn("mx-auto max-w-7xl px-6 py-12 section-reveal", isVisible && "is-visible")}>
@@ -75,8 +53,24 @@ export function Footer({ onNavigate }: { onNavigate?: (section: string) => void 
             <div>
               <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#f0b400]">{t("footer.platform")}</p>
               <ul className="flex flex-col gap-2.5">
-                <li><a href="#how-it-works" onClick={(e) => handleNavClick(e, "how-it-works")} className="text-sm font-medium text-white/60 transition-colors hover:text-white cursor-pointer">{t("nav.howItWorks")}</a></li>
-                <li><a href="#profiles" onClick={(e) => handleNavClick(e, "profiles")} className="text-sm font-medium text-white/60 transition-colors hover:text-white cursor-pointer">{t("nav.solutions")}</a></li>
+                <li>
+                  <button 
+                    type="button"
+                    onClick={() => scrollToSection("how-it-works")} 
+                    className="text-sm font-medium text-white/60 transition-colors hover:text-white cursor-pointer"
+                  >
+                    {t("nav.howItWorks")}
+                  </button>
+                </li>
+                <li>
+                  <button 
+                    type="button"
+                    onClick={() => scrollToSection("profiles")} 
+                    className="text-sm font-medium text-white/60 transition-colors hover:text-white cursor-pointer"
+                  >
+                    {t("nav.solutions")}
+                  </button>
+                </li>
               </ul>
             </div>
             <div>
