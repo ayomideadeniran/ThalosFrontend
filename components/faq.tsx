@@ -7,10 +7,16 @@ import { useTypewriter } from "@/hooks/use-typewriter"
 import { useLanguage } from "@/lib/i18n"
 
 function FAQItem({ q, a, open, toggle }: { q: string; a: string; open: boolean; toggle: () => void }) {
+  const handleClick = () => {
+    console.log("[v0] FAQ toggle clicked, current open:", open)
+    toggle()
+  }
+  
   return (
     <div className="border-b border-white/15">
       <button
-        onClick={toggle}
+        onClick={handleClick}
+        type="button"
         className="flex w-full items-center justify-between py-5 text-left transition-colors"
         aria-expanded={open}
       >

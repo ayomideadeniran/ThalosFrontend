@@ -12,21 +12,29 @@ export function Footer({ onNavigate }: { onNavigate?: (section: string) => void 
   
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
     e.preventDefault()
+    console.log("[v0] Footer nav clicked:", section)
+    
     // Try multiple ways to find the section
     let el = document.getElementById(section)
+    console.log("[v0] getElementById result:", el)
+    
     if (!el) {
       el = document.querySelector(`[id="${section}"]`) as HTMLElement
+      console.log("[v0] querySelector [id=] result:", el)
     }
     if (!el) {
       el = document.querySelector(`section#${section}`) as HTMLElement
+      console.log("[v0] querySelector section# result:", el)
     }
     
     if (el) {
+      console.log("[v0] Found element, scrolling to:", section)
       const headerOffset = 80
       const elementPosition = el.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.scrollY - headerOffset
       window.scrollTo({ top: offsetPosition, behavior: "smooth" })
     } else {
+      console.log("[v0] Element not found, trying fallback")
       // Fallback: use onNavigate if provided
       if (onNavigate) {
         onNavigate(section)
