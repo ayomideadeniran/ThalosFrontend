@@ -162,8 +162,9 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
       <div className="absolute top-16 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f0b400]/20 to-transparent" aria-hidden="true" />
 
       {/* Vertical THALOS letters - desktop only */}
+      {isHeroVisible && (
       <div
-        className={`pointer-events-none fixed right-0 top-1/2 -translate-y-1/2 z-20 hidden select-none md:flex md:flex-col md:items-end lg:right-4 xl:right-8 transition-opacity duration-500 ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}
+        className="pointer-events-none fixed right-0 top-1/2 -translate-y-1/2 z-20 hidden select-none md:flex md:flex-col md:items-end lg:right-4 xl:right-8"
         aria-hidden="true"
       >
         {LETTERS.map((letter, i) => (
@@ -181,9 +182,11 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
           </span>
         ))}
       </div>
+      )}
 
-      {/* Fixed viewport container for all pages */}
-      <div className={`fixed inset-0 z-10 overflow-hidden transition-opacity duration-500 ${isHeroVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      {/* Fixed viewport container for all pages - top-16 to account for header */}
+      {isHeroVisible && (
+      <div className="fixed inset-x-0 top-16 bottom-0 z-10 overflow-hidden">
         
         {/* Page 1: Intro */}
         <div 
@@ -394,7 +397,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
         </div>
 
         {/* Page indicators */}
-        <div className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2 transition-opacity duration-300 ${isHeroVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
@@ -413,6 +416,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
           ))}
         </div>
       </div>
+      )}
 
       {/* CSS for floating animation */}
       <style jsx>{`
