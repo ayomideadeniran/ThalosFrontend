@@ -253,7 +253,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
                 <Button
                   size="lg"
                   onClick={() => onNavigate("sign-in")}
-                  className="h-14 rounded-xl bg-gradient-to-b from-[#f5c518] to-[#d9a300] px-10 text-base font-bold text-[#0c1220] hover:from-[#f0b400] hover:to-[#c99300] active:scale-[0.97] transition-all duration-200 shadow-[0_4px_0_#a67c00,0_6px_20px_rgba(240,180,0,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] hover:shadow-[0_3px_0_#a67c00,0_4px_15px_rgba(240,180,0,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] active:shadow-[0_1px_0_#a67c00,inset_0_1px_0_rgba(255,255,255,0.3)] active:translate-y-[2px]"
+                  className="h-14 rounded-xl bg-[#f0b400] px-10 text-base font-bold text-[#0c1220] hover:bg-[#d9a300] active:scale-[0.98] transition-all duration-200 shadow-[0_0_40px_rgba(240,180,0,0.3)]"
                 >
                   {content.cta}
                 </Button>
@@ -261,7 +261,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
                   variant="outline"
                   size="lg"
                   onClick={() => onNavigate("how-it-works")}
-                  className="h-14 rounded-xl border-2 border-foreground/20 bg-background/60 backdrop-blur-sm px-10 text-base font-bold text-foreground hover:bg-foreground/10 hover:border-foreground/30 active:scale-[0.97] transition-all duration-200 shadow-[0_4px_0_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_3px_0_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.1)] active:shadow-[0_1px_0_rgba(0,0,0,0.1)] active:translate-y-[2px]"
+                  className="h-14 rounded-xl border-border bg-background/50 backdrop-blur-sm px-10 text-base font-bold text-foreground hover:bg-accent active:scale-[0.98] transition-all duration-200"
                 >
                   {content.ctaSecondary}
                 </Button>
@@ -402,7 +402,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
             <Button
               size="lg"
               onClick={() => onNavigate("sign-in")}
-              className="mt-10 h-14 rounded-xl bg-gradient-to-b from-[#f5c518] to-[#d9a300] px-12 text-base font-bold text-[#0c1220] hover:from-[#f0b400] hover:to-[#c99300] active:scale-[0.97] transition-all duration-200 shadow-[0_4px_0_#a67c00,0_6px_20px_rgba(240,180,0,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] hover:shadow-[0_3px_0_#a67c00,0_4px_15px_rgba(240,180,0,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] active:shadow-[0_1px_0_#a67c00,inset_0_1px_0_rgba(255,255,255,0.3)] active:translate-y-[2px]"
+              className="mt-10 h-14 rounded-xl bg-[#f0b400] px-12 text-base font-bold text-[#0c1220] hover:bg-[#d9a300] active:scale-[0.98] transition-all duration-200 shadow-[0_0_40px_rgba(240,180,0,0.3)]"
             >
               {content.finalCta}
             </Button>

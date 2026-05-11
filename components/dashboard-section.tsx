@@ -175,14 +175,14 @@ export function DashboardSection() {
                       variant="ghost"
                       size="sm"
                       onClick={() => setSelectedEscrow(selectedEscrow === escrow.id ? null : escrow.id)}
-                      className="text-xs font-semibold text-white/60 hover:text-[#f0b400] hover:bg-[#f0b400]/10"
+                      className="text-xs font-semibold text-white/60 hover:text-[#b0c4de] hover:bg-[#b0c4de]/10"
                     >
                       View
                     </Button>
                     {escrow.status !== "completed" && (
                       <Button
                         size="sm"
-                        className="rounded-full bg-gradient-to-b from-[#f5c518] to-[#d9a300] text-xs font-semibold text-background shadow-[0_3px_0_#a67c00,0_4px_12px_rgba(240,180,0,0.25),inset_0_1px_0_rgba(255,255,255,0.3)] hover:from-[#f0b400] hover:to-[#c99300] hover:shadow-[0_2px_0_#a67c00,0_3px_10px_rgba(240,180,0,0.3)] active:shadow-[0_1px_0_#a67c00] active:translate-y-[1px] transition-all duration-200"
+                        className="rounded-full bg-[#f0b400] text-xs font-semibold text-background shadow-[0_2px_8px_rgba(240,180,0,0.2),0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-[#b0c4de] hover:text-background hover:shadow-[0_2px_12px_rgba(176,196,222,0.3),0_1px_2px_rgba(0,0,0,0.4)] transition-all duration-400"
                       >
                         Release
                       </Button>
