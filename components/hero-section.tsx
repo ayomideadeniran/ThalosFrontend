@@ -12,8 +12,8 @@ interface HeroSectionProps {
 
 const LETTERS = ["T", "h", "a", "l", "o", "s"]
 
-// YouTube video ID
-const YOUTUBE_VIDEO_ID = "pKIizFs0dO4"
+// Video URL from Supabase Storage
+const VIDEO_URL = "https://cpkjclwvgnxgadiaoaei.supabase.co/storage/v1/object/public/Video%20Thalos/demo%20landing.mp4"
 
 // Typewriter phrases - rotating with correct article (tu/tus in Spanish)
 const TYPEWRITER_PHRASES = {
@@ -351,21 +351,16 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
           <div className="text-center w-full max-w-3xl mx-auto">
             <div style={{ filter: "drop-shadow(0 50px 100px rgba(0,0,0,0.5)) drop-shadow(0 20px 40px rgba(240,180,0,0.1))" }}>
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-border/20 bg-black">
-                {currentPage >= 2 ? (
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&vq=hd1080&hd=1`}
-                    className="w-full aspect-video pointer-events-none"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    title="Thalos Demo Video"
-                    style={{ border: 0 }}
-                  />
-                ) : (
-                  <div className="w-full aspect-video bg-black/80 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
-                      <div className="w-0 h-0 border-l-[20px] border-l-white/50 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1" />
-                    </div>
-                  </div>
-                )}
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full aspect-video object-cover"
+                >
+                  <source src={VIDEO_URL} type="video/mp4" />
+                  Tu navegador no soporta el elemento de video.
+                </video>
               </div>
             </div>
             
