@@ -34,44 +34,52 @@ const TYPEWRITER_PHRASES = {
 // Content translations - ALL content translated
 const CONTENT = {
   en: {
-    headline: "Protect your",
+    headlinePrefix: "Protect",
     description: "We are the bridge between trust and payments. Create digital agreements where funds are protected until conditions are met, with clear milestones, instant release upon approval, and built-in dispute resolution.",
     cta: "Get Started",
     ctaSecondary: "See how it works",
-    imageCaption1: "Start in seconds",
-    imageCaption2: "Manage your agreements",
-    videoCaption: "See it in action",
+    page2: "Get started in seconds",
+    page3: "Manage your agreements",
+    page4: "Watch it in action",
     finalHeadline: "Trust at every step",
     finalSubheadline: "Every transaction protected. Every agreement honored.",
-    finalCta: "Start now",
+    finalCta: "Start now"
   },
   es: {
-    headline: "Protege tus",
-    description: "Somos el puente entre la confianza y los pagos. Crea acuerdos digitales donde los fondos están protegidos hasta cumplir condiciones, con hitos claros, liberación instantánea al aprobar, y resolución de disputas incluida.",
+    headlinePrefix: "Protege",
+    description: "Somos el puente entre la confianza y los pagos. Crea acuerdos digitales donde los fondos están protegidos hasta cumplir las condiciones, con hitos claros, liberación instantánea al aprobar, y resolución de disputas incluida.",
     cta: "Comenzar",
     ctaSecondary: "Ver cómo funciona",
-    imageCaption1: "Empieza en segundos",
-    imageCaption2: "Gestiona tus acuerdos",
-    videoCaption: "Míralo en acción",
+    page2: "Empieza en segundos",
+    page3: "Gestiona tus acuerdos",
+    page4: "Míralo en acción",
     finalHeadline: "Confianza en cada paso",
     finalSubheadline: "Cada transacción protegida. Cada acuerdo cumplido.",
-    finalCta: "Comenzar ahora",
+    finalCta: "Comenzar ahora"
   }
 }
 
 // Typewriter hook with rotating phrases
-function useRotatingTypewriter(phrases: string[], isActive: boolean) {
+interface TypewriterPhrase {
+  text: string
+  article: string
+}
+
+function useRotatingTypewriter(phrases: TypewriterPhrase[], isActive: boolean) {
   const [displayText, setDisplayText] = useState("")
+  const [currentArticle, setCurrentArticle] = useState(phrases[0]?.article || "")
   const [isTyping, setIsTyping] = useState(false)
   const [phraseIndex, setPhraseIndex] = useState(0)
-
+  
   useEffect(() => {
-    if (!isActive) {
-      setDisplayText("")
-      return
-    }
-
-    const currentPhrase = phrases[phraseIndex]
+  if (!isActive) {
+  setDisplayText("")
+  return
+  }
+  
+  const currentPhraseObj = phrases[phraseIndex]
+  const currentPhrase = currentPhraseObj.text
+  setCurrentArticle(currentPhraseObj.article)
     let currentIndex = 0
     let isDeleting = false
     setIsTyping(true)
@@ -101,8 +109,8 @@ function useRotatingTypewriter(phrases: string[], isActive: boolean) {
     return () => clearInterval(interval)
   }, [phrases, phraseIndex, isActive])
 
-  return { displayText, isTyping }
-}
+return { displayText, isTyping, currentArticle }
+  }
 
 export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
   const { language } = useLanguage()
@@ -115,7 +123,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
 
   const content = CONTENT[language as keyof typeof CONTENT] || CONTENT.en
   const typewriterPhrases = TYPEWRITER_PHRASES[language as keyof typeof TYPEWRITER_PHRASES] || TYPEWRITER_PHRASES.en
-  const { displayText, isTyping } = useRotatingTypewriter(typewriterPhrases, currentPage === 0)
+  const { displayText, isTyping, currentArticle } = useRotatingTypewriter(typewriterPhrases, currentPage === 0)
 
   useEffect(() => {
     const t1 = setTimeout(() => { onIntroComplete?.() }, 2000)
@@ -224,7 +232,7 @@ export function HeroSection({ onNavigate, onIntroComplete }: HeroSectionProps) {
 
               {/* Headlines */}
               <h1 className="animate-fade-in-up text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground leading-[0.95]">
-                {content.headline}
+                {content.headlinePrefix} {currentArticle}
               </h1>
               
               {/* Typewriter effect */}
