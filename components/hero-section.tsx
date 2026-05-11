@@ -15,10 +15,20 @@ const LETTERS = ["T", "h", "a", "l", "o", "s"]
 // YouTube video ID
 const YOUTUBE_VIDEO_ID = "pKIizFs0dO4"
 
-// Typewriter phrases - rotating
+// Typewriter phrases - rotating with correct article (tu/tus in Spanish)
 const TYPEWRITER_PHRASES = {
-  en: ["transactions", "agreements", "business", "future"],
-  es: ["transacciones", "acuerdos", "negocios", "futuro"]
+  en: [
+    { text: "transactions", article: "your" },
+    { text: "agreements", article: "your" },
+    { text: "business", article: "your" },
+    { text: "future", article: "your" }
+  ],
+  es: [
+    { text: "transacciones", article: "tus" },
+    { text: "acuerdos", article: "tus" },
+    { text: "negocios", article: "tus" },
+    { text: "futuro", article: "tu" } // "tu futuro" not "tus futuro"
+  ]
 }
 
 // Content translations - ALL content translated
