@@ -46,12 +46,26 @@ export async function getKit(): Promise<StellarWalletsKit | null> {
     await waitForFreighter(3000)
     
     const mod = await import("@creit.tech/stellar-wallets-kit")
-    const { StellarWalletsKit: Kit, WalletNetwork, FreighterModule } = mod
+    const { 
+      StellarWalletsKit: Kit, 
+      WalletNetwork, 
+      FreighterModule, 
+      xBullModule, 
+      AlbedoModule,
+      LobstrModule,
+      HanaModule
+    } = mod
     
-    // Only use Freighter - no MetaMask or other wallets
+    // Stellar wallets only - no MetaMask/WalletConnect
     kitInstance = new Kit({
       network: WalletNetwork.PUBLIC,
-      modules: [new FreighterModule()],
+      modules: [
+        new FreighterModule(),
+        new xBullModule(),
+        new AlbedoModule(),
+        new LobstrModule(),
+        new HanaModule(),
+      ],
     })
     
     return kitInstance
