@@ -272,19 +272,19 @@ export function PlatformBuilder() {
               variant="outline"
               onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
               disabled={currentStep === 0}
-              className="rounded-full border-border/30 bg-card/20 text-foreground font-semibold hover:bg-[#b0c4de]/10 hover:text-[#b0c4de] hover:border-[#b0c4de]/30 hover:shadow-[0_0_20px_rgba(176,196,222,0.08)] transition-all duration-400"
+              className="rounded-full border-2 border-border/30 bg-card/20 text-foreground font-semibold hover:bg-[#f0b400]/10 hover:text-[#f0b400] hover:border-[#f0b400]/30 shadow-[0_3px_0_rgba(0,0,0,0.15)] hover:shadow-[0_2px_0_rgba(0,0,0,0.15),0_4px_15px_rgba(240,180,0,0.1)] active:shadow-[0_1px_0_rgba(0,0,0,0.1)] active:translate-y-[2px] transition-all duration-200"
             >
               {t("builder.back")}
             </Button>
             {currentStep < steps.length - 1 ? (
               <Button
                 onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
-                className="rounded-full bg-[#f0b400] text-background font-semibold shadow-[0_4px_16px_rgba(240,180,0,0.25),0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-[#b0c4de] hover:text-background hover:shadow-[0_4px_20px_rgba(176,196,222,0.35),0_1px_3px_rgba(0,0,0,0.4)] transition-all duration-400"
+                className="rounded-full bg-gradient-to-b from-[#f5c518] to-[#d9a300] text-background font-semibold shadow-[0_4px_0_#a67c00,0_6px_20px_rgba(240,180,0,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] hover:from-[#f0b400] hover:to-[#c99300] hover:shadow-[0_3px_0_#a67c00,0_4px_15px_rgba(240,180,0,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] active:shadow-[0_1px_0_#a67c00] active:translate-y-[2px] transition-all duration-200"
               >
                 {t("builder.next")}
               </Button>
             ) : (
-              <Button className="rounded-full bg-[#f0b400] text-background font-semibold shadow-[0_4px_16px_rgba(240,180,0,0.25),0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.2)] hover:bg-[#b0c4de] hover:text-background hover:shadow-[0_4px_20px_rgba(176,196,222,0.35),0_1px_3px_rgba(0,0,0,0.4)] transition-all duration-400">
+              <Button className="rounded-full bg-gradient-to-b from-[#f5c518] to-[#d9a300] text-background font-semibold shadow-[0_4px_0_#a67c00,0_6px_20px_rgba(240,180,0,0.3),inset_0_1px_0_rgba(255,255,255,0.3)] hover:from-[#f0b400] hover:to-[#c99300] hover:shadow-[0_3px_0_#a67c00,0_4px_15px_rgba(240,180,0,0.4),inset_0_1px_0_rgba(255,255,255,0.3)] active:shadow-[0_1px_0_#a67c00] active:translate-y-[2px] transition-all duration-200">
                 {t("builder.create")}
               </Button>
             )}

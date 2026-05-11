@@ -97,7 +97,7 @@ export function BottomBar({ onNavigate }: { onNavigate: (section: string) => voi
       <div
         ref={barRef}
         className={cn(
-          "fixed z-50 select-none transition-opacity duration-700",
+          "fixed z-50 select-none transition-opacity duration-700 touch-none",
           isVisible ? "opacity-100" : "opacity-0 pointer-events-none",
           dragging ? "cursor-grabbing" : "cursor-grab"
         )}
@@ -105,6 +105,7 @@ export function BottomBar({ onNavigate }: { onNavigate: (section: string) => voi
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
       >
         {/* Professional Menu Popup */}
         {showMenu && (
