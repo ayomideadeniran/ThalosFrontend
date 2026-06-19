@@ -55,14 +55,16 @@ export async function GET(req: Request) {
       if (existing.name) userName = existing.name;
       
       // Check if user has a profile with account_type
-      const { data: profile } = await db
-        .from("profiles")
-        .select("account_type")
-        .eq("wallet_address", walletPublicKey)
-        .maybeSingle();
-      
-      if (profile?.account_type) {
-        accountType = profile.account_type;
+      if (walletPublicKey) {
+        const { data: profile } = await db
+          .from("profiles")
+          .select("account_type")
+          .eq("wallet_address", walletPublicKey)
+          .maybeSingle();
+        
+        if (profile?.account_type) {
+          accountType = profile.account_type;
+        }
       }
     } else {
       const { data: inserted, error: insertError } = await db
