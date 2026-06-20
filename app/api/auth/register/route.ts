@@ -72,6 +72,11 @@ export async function POST(req: Request) {
   // The custodial-wallet link and the wallet-keyed profile row are intentionally
   // not created here. They depend on a wallet, which the user now connects later
   // (M2 flow), so they belong to the wallet-connect step rather than signup.
+  //
+  // account_type (personal/enterprise) is not dropped: it is no longer persisted
+  // at signup (it lived on the wallet-keyed profile) and is instead set at the
+  // profile-selection / wallet-connect step (#1.4). Signup must not break without
+  // it, which is why nothing here depends on a wallet or profile.
 
   const user: AuthUser = {
     id: inserted.id,
