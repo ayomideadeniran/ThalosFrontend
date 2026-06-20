@@ -1,19 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { type AuthUser, type AuthWallet, normalizeAuthUser } from "./auth/types";
 
-export type UserWallet = {
-  publicKey: string;
-  provider: string;
-};
-
-export type AuthUser = {
-  id: string;
-  email: string | null;
-  name: string | null;
-  avatarUrl: string | null;
-  wallet: UserWallet | null;
-};
+export type { AuthUser, AuthWallet as UserWallet };
 
 type AuthState = {
   user: AuthUser | null;
@@ -73,7 +63,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return res.json();
       })
       .then((data) => {
-        login(data.user, storedToken);
+        const normalized = normalizeAuthUser(data.user);
+        if (!normalized) throw new Error("Invalid user payload");
+        login(normalized, storedToken);
       })
       .catch(() => {
         logout();
