@@ -26,8 +26,7 @@ This migration deletes the auto-generated custodial wallets. Since these keys we
 1. **Prerequisite:** Ensure a snapshot/backup of the `auth_users` and `linked_wallets` tables is taken before executing `011_migrate_orphan_wallets.sql`.
 2. **Rollback Steps:** Restore the deleted `linked_wallets` records and revert the `wallet_public_key` values in `auth_users` from the backup.
 
-### Screenshots
-| Landing Page | Sign In Modal |
-|---|---|
-| ![Landing Page](https://github.com/ayomideadeniran/ThalosFrontend/raw/feature/issue-74-migrate-orphan-wallets/public/screenshot_landing.png) | ![Sign In Modal](https://github.com/ayomideadeniran/ThalosFrontend/raw/feature/issue-74-migrate-orphan-wallets/public/screenshot_signin.png) |
+### Proof of Completion (Terminal Output)
+![Terminal Verification Output](https://github.com/ayomideadeniran/ThalosFrontend/raw/feature/issue-74-migrate-orphan-wallets/public/terminal_screenshot.png)
+
 
