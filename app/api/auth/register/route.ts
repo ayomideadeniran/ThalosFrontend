@@ -81,8 +81,9 @@ export async function POST(req: Request) {
   const user: AuthUser = {
     id: inserted.id,
     email: inserted.email,
-    name: inserted.name ?? undefined,
-    wallet: { publicKey: null },
+    name: inserted.name ?? null,
+    avatarUrl: null,
+    wallet: null,
   };
   const token = signToken({ sub: inserted.id, email: inserted.email });
   return NextResponse.json({ user, token });

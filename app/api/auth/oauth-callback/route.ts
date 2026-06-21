@@ -26,6 +26,7 @@ export async function POST(req: Request) {
   }
 
   const name = (supaUser.user_metadata?.full_name ?? supaUser.user_metadata?.name ?? supaUser.user_metadata?.user_name) as string | undefined;
+  const avatarUrl = (supaUser.user_metadata?.avatar_url ?? supaUser.user_metadata?.picture ?? null) as string | null;
   const db = createServiceClient();
   const { data: existing } = await db
     .from("auth_users")
@@ -70,8 +71,11 @@ export async function POST(req: Request) {
   const user: AuthUser = {
     id: userId,
     email,
-    name: userName,
-    wallet: { publicKey: walletPublicKey, type: "embedded" },
+    name: userName ?? null,
+    avatarUrl,
+    wallet: walletPublicKey
+      ? { publicKey: walletPublicKey, provider: "embedded" }
+      : null,
   };
   const token = signToken({ sub: userId, email });
   return NextResponse.json({ user, token });

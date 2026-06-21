@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n";
-import { useAuthStore } from "@/lib/auth-store";
+import { useAuthStore, normalizeAuthUser } from "@/lib/auth-store";
 import { useRouter } from "next/navigation";
 import { signInWithOAuthAction } from "@/lib/actions/auth-oauth";
 import { useStellarWallet } from "@/lib/stellar-wallet";
@@ -77,7 +77,9 @@ export function SocialAuthModal({ mode, open, onClose }: SocialAuthModalProps) {
         throw new Error(message);
       }
       const data = await res.json();
-      login(data.user, data.token);
+      const user = normalizeAuthUser(data.user);
+      if (!user) throw new Error("Invalid response from server");
+      login(user, data.token);
       onClose();
       router.push(accountType === "enterprise" ? "/dashboard/business" : "/dashboard/personal");
     } catch (e) {
