@@ -57,20 +57,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const storedUser = localStorage.getItem("auth_user");
-        const storedToken = localStorage.getItem("auth_token");
-        if (storedUser && storedToken) {
-          setUser(JSON.parse(storedUser));
-          setToken(storedToken);
-        }
-      } catch (e) {
-        console.error("Failed to hydrate auth state", e);
-      }
+    if (typeof window === "undefined") return;
+
+    const storedToken = localStorage.getItem("auth_token");
+    if (!storedToken) {
       setHydrated(true);
+      return;
     }
-  }, []);
+
+    fetch("/api/auth/me", {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Invalid token");
+        return res.json();
+      })
+      .then((data) => {
+        login(data.user, storedToken);
+      })
+      .catch(() => {
+        logout();
+      })
+      .finally(() => {
+        setHydrated(true);
+      });
+  }, [login, logout]);
 
   return (
     <AuthContext.Provider value={{ user, token, hydrated, login, logout }}>
